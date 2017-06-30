@@ -11,7 +11,7 @@ def get_page(url)
 end
 
 def get_link(page)
-    return "https://en.wikipedia.org" + page[/<p>(.*?)<a href="(.*?)"/m, 2]
+    return "https://en.wikipedia.org" + page[/<p>(.*?)(\(([^(]*)\)){0,}<a href="(.*?)"/m, 4]
 end
 
 def get_title(page)
@@ -32,6 +32,7 @@ begin
     url = get_link(page)
     title = get_title(page)
     puts title
+    puts url
     count += 1
 end until title == end_title
 
