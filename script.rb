@@ -11,7 +11,7 @@ def get_page(url)
 end
 
 puts "Enter the starting page name:"
-startpage = gets
+startpage = gets.chomp
 endpage = "Philosophy"
 
-puts get_page("https://en.wikipedia.org/wiki/Molecule")
+puts get_page("https://en.wikipedia.org/wiki/#{startpage}")
