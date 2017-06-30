@@ -11,7 +11,7 @@ def get_page(url)
 end
 
 def get_link(page)
-    return "https://en.wikipedia.org/wiki/Molecule"
+    return "https://en.wikipedia.org" + page[/<p>(.*?)<a href="(.*?)"/m, 2]
 end
 
 def get_title(page)
@@ -25,10 +25,14 @@ end_title = "Philosophy"
 page = nil
 url = "https://en.wikipedia.org/wiki/#{start_title}"
 title = nil
+count = 0
 
 begin
     page = get_page(url)
     url = get_link(page)
     title = get_title(page)
     puts title
+    count += 1
 end until title == end_title
+
+puts "Traversed #{count} Pages"
