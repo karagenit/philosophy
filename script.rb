@@ -10,8 +10,25 @@ def get_page(url)
     end
 end
 
-puts "Enter the starting page name:"
-startpage = gets.chomp
-endpage = "Philosophy"
+def get_link(page)
+    return "https://en.wikipedia.org/wiki/Molecule"
+end
 
-puts get_page("https://en.wikipedia.org/wiki/#{startpage}")
+def get_title(page)
+    return "Molecule"
+end
+
+puts "Enter the starting page name:"
+start_title = gets.chomp
+end_title = "Philosophy"
+
+page = nil
+url = "https://en.wikipedia.org/wiki/#{start_title}"
+title = nil
+
+begin
+    page = get_page(url)
+    url = get_link(page)
+    title = get_title(page)
+    puts title
+end until title == end_title
