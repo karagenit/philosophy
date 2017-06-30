@@ -3,11 +3,15 @@
 require 'net/http'
 require 'uri'
 
-def get_page(name) 
-    uri = URI.parse("https://en.wikipedia.org")
+def get_page(url) 
+    uri = URI.parse(url)
     Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
-        return http.get("/wiki/#{name}").body
+        return http.get(uri.path).body
     end
 end
 
-puts get_page("Molecule")
+puts "Enter the starting page name:"
+startpage = gets
+endpage = "Philosophy"
+
+puts get_page("https://en.wikipedia.org/wiki/Molecule")
