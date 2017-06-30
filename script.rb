@@ -15,7 +15,7 @@ def get_link(page)
 end
 
 def get_title(page)
-    return "Molecule"
+    return page[/class="firstHeading" lang="en">(.*?)</m, 1]
 end
 
 puts "Enter the starting page name:"
