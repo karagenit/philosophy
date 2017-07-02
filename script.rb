@@ -11,7 +11,7 @@ def get_page(url)
 end
 
 def get_link(page, links)
-    return page[/<p>([^\(\)]*?)(\([^\(\)]{0,}((\([^\(\)]{0,}\)){0,}[^\(\)]{0,}){0,}\)){0,}([^\(\)]*?)<a href="(.*?)"/m, 6]
+    return "https://en.wikipedia.org/" + page[/<p>([^\(\)]*?)(\([^\(\)]{0,}((\([^\(\)]{0,}\)){0,}[^\(\)]{0,}){0,}\)){0,}([^\(\)]*?)<a href="\/(.*?)"/m, 6]
     # TODO links list
     # TODO no Help:* links
 end
