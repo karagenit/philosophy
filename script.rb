@@ -24,10 +24,8 @@ def get_link(page)
         end
 
         if parens == 0 && body[i] == "<" && body[i+1] == "a"
-            link = body[i..-1][/<a href="(.*?)"/m, 1]
-            if link[0] != "#"
-                return "https://en.wikipedia.org" + link
-            end
+            link = body[i..-1][/<a href="\/(.*?)"/m, 1]
+            return "https://en.wikipedia.org/" + link
         end
     end
 end
