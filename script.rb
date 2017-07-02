@@ -11,26 +11,9 @@ def get_page(url)
 end
 
 def get_link(page, links)
-    body = page[/<p>(.*?)<\/p>/m, 1]
-    parens = 0
-
-    for i in 0..(body.length - 1)
-        if body[i] == "("
-            parens = parens + 1
-        end
-        
-        if body[i] == ")"
-            parens = parens - 1
-        end
-
-        if parens == 0 && body[i] == "<" && body[i+1] == "a"
-            link = body[i..-1][/<a href="\/(.*?)"/m, 1]
-            if links[link] != 1
-                links[link] = 1
-                return "https://en.wikipedia.org/" + link
-            end
-        end
-    end
+    return page[/<p>([^\(\)]*?)(\([^\(\)]{0,}((\([^\(\)]{0,}\)){0,}[^\(\)]{0,}){0,}\)){0,}([^\(\)]*?)<a href="(.*?)"/m, 6]
+    # TODO links list
+    # TODO no Help:* links
 end
 
 def get_title(page)
