@@ -11,15 +11,34 @@ def get_page(url)
 end
 
 def get_link(page)
-    return "https://en.wikipedia.org" + page[/<p>(.*?)(\(([^(]*)\)){0,}<a href="(.*?)"/m, 4]
+    body = page[/<p>(.*?)<\/p>/m, 1]
+    parens = 0
+
+    for i in 0..(body.length - 1)
+        if body[i] == "("
+            parens = parens + 1
+        end
+        
+        if body[i] == ")"
+            parens = parens - 1
+        end
+
+        if parens == 0 && body[i] == "<" && body[i+1] == "a"
+            link = body[i..-1][/<a href="(.*?)"/m, 1]
+            if link[0] != "#"
+                return "https://en.wikipedia.org" + link
+            end
+        end
+    end
 end
 
 def get_title(page)
     return page[/class="firstHeading" lang="en">(.*?)</m, 1]
 end
 
-puts "Enter the starting page name:"
+print "Enter the starting page name: "
 start_title = gets.chomp
+puts "---------------------"
 end_title = "Philosophy"
 
 page = nil
@@ -32,7 +51,6 @@ begin
     url = get_link(page)
     title = get_title(page)
     puts title
-    puts url
     count += 1
 end until title == end_title
 
